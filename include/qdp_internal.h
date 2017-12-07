@@ -226,6 +226,33 @@ namespace QDPInternal
     }
   }
 
+  //! Global And
+  inline void globalCheckAnd(void* inout, void* in)
+  {
+    *(unsigned int*)inout = *(unsigned int*)inout & *(unsigned int*)in;
+  }
+
+  //! Wrapper to get a functional global And
+  inline void globalAnd(bool& dest)
+  {
+    QMP_binary_reduction(&dest, sizeof(bool), globalCheckAnd);
+  }
+
+
+
+  //! Global Or
+  inline void globalCheckOr(void* inout, void* in)
+  {
+    *(unsigned int*)inout = *(unsigned int*)inout | *(unsigned int*)in;
+  }
+
+  //! Wrapper to get a functional global Or
+  inline void globalOr(bool& dest)
+  {
+    QMP_binary_reduction(&dest, sizeof(bool), globalCheckOr);
+  }
+
+
 
   //! Broadcast from primary node to all other nodes
   template<class T>
